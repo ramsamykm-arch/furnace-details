@@ -71,11 +71,14 @@
     <button type="submit">Submit</button>
   </form>
 
-  <script>
-    const { createClient } = supabase;
-    const supabaseUrl =https://jpzkbhumwvtbioektpsr.supabase.co;   // replace with your Supabase project URL
-    const supabaseKey = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpwemtiaHVtd3Z0YmlvZWt0cHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3ODUyNTYsImV4cCI6MjEwNDM2MTI1Nn0.BuH_dUovcE4OspHU6qTzPz6csSr0bNeNtApt9N8uy2A;      // replace with your Supabase anon key
-    const supabaseClient = createClient(supabaseUrl, supabaseKey);
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const { createClient } = supabase;
+
+  // Use your actual project URL and anon key from Settings → API
+  const supabaseUrl = "https://jpzkbhumwvtbioektpsr.supabase.co";
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpwemtiaHVtd3Z0YmlvZWt0cHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3ODUyNTYsImV4cCI6MjEwNDM2MTI1Nn0.BuH_dUovcE4OspHU6qTzPz6csSr0bNeNtApt9N8uy2A";  // full anon key
+  const supabaseClient = createClient(supabaseUrl, supabaseKey);
 
     document.getElementById("furnaceForm").addEventListener("submit", async (e) => {
       e.preventDefault();
