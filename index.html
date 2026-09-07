@@ -84,7 +84,7 @@
       e.preventDefault();
 
       const { error } = await supabaseClient
-        .from("furnace")   // replace with your table name
+        .from("Furnace")   // replace with your table name
         .insert({
           WO_No: document.getElementById("WO_No").value,
           Sort_WO_No: document.getElementById("Sort_WO_No").value,
