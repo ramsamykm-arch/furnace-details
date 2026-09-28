@@ -1,111 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Furnace Data Entry</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #f0f8ff, #e6f7ff);
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
-    h2 {
-      text-align: center;
-      background-color: #007acc;
-      color: white;
-      padding: 15px;
-      margin: 0;
-    }
-    form {
-      max-width: 600px;
-      margin: 30px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    input {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button {
-      margin-top: 20px;
-      padding: 10px 15px;
-      background-color: #007acc;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    button:hover {
-      background-color: #005f99;
-    }
-  </style>
-</head>
-<body>
-  <h2>Furnace Data Entry Form</h2>
-  <form id="furnaceForm">
-    <label>WO_No: <input type="text" id="WO_No"></label>
-    <label>Sort_WO_No: <input type="text" id="Sort_WO_No"></label>
-    <label>Furnace_Date: <input type="date" id="Furnace_Date"></label>
-    <label>Furnace_Shift: <input type="text" id="Furnace_Shift"></label>
-    <label>Charge_Type: <input type="text" id="Charge_Type"></label>
-    <label>Furnace_no: <input type="number" id="Furnace_no"></label>
-    <label>Furnace_Base_No: <input type="number" id="Furnace_Base_No"></label>
-    <label>Category_Type: <input type="text" id="Category_Type"></label>
-    <label>Quantity: <input type="text" id="Quantity"></label>
-    <label>Updated_By: <input type="text" id="Updated_By"></label>
-    <label>Status: <input type="text" id="Status"></label>
-    <button type="submit">Submit</button>
-  </form>
-
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sorting Entry</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--g1:#063b1d;--g2:#075c2b;--g3:#168445;--g4:#e8f5ec;--bd:#cbd8cf;--tx:#1d2b22}
+*{box-sizing:border-box}body{margin:0;font-family:Segoe UI,Arial;background:linear-gradient(135deg,#edf7f0,#f8fbf9);color:var(--tx)}
+.hidden{display:none!important}button,input,select{font:inherit}.login{min-height:100vh;display:grid;place-items:center;padding:20px}
+.card{background:#fff;border:1px solid #dce8df;border-radius:18px;box-shadow:0 10px 28px #04371a1f}
+.login-card{width:min(420px,100%);overflow:hidden}.login-head{padding:30px;text-align:center;color:#fff;background:linear-gradient(135deg,var(--g1),var(--g3))}
+.mark{width:62px;height:62px;margin:auto auto 12px;border-radius:14px;background:#fff;color:var(--g2);display:grid;place-items:center;font-size:28px;font-weight:800}
+.login-head h1{margin:0}.login-head p{margin:6px 0 0;opacity:.85}.login-body{padding:28px}
+.field{margin-bottom:16px}.field label,.fg label{display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:#356047}
+input,select{width:100%;height:41px;border:1px solid #bfcac2;border-radius:6px;padding:0 10px;background:#fff;outline:0}
+input:focus,select:focus{border-color:#2c9b58;box-shadow:0 0 0 3px #2c9b5818}
+.primary{height:41px;border:0;border-radius:6px;background:var(--g2);color:#fff;padding:0 24px;font-weight:700;cursor:pointer}.primary:hover{background:var(--g1)}
+.msg{font-size:13px;margin:9px 0;color:#b42318}.ok{color:var(--g2)}
+.header{height:72px;background:#fff;border-bottom:1px solid #d9e3dc;display:flex;align-items:center;justify-content:space-between;padding:0 34px;box-shadow:0 2px 9px #0000000a}
+.brand{display:flex;align-items:center;gap:12px}.brand-icon{width:39px;height:39px;border-radius:9px;background:var(--g2);color:#fff;display:grid;place-items:center;font-weight:800}.brand h1{margin:0;color:var(--g1);font-size:21px}.brand small{color:#68766d}.user{display:flex;gap:12px;align-items:center;font-size:13px;color:#526058}.logout,.secondary{height:38px;border:1px solid #aebdb4;background:#fff;color:var(--g2);border-radius:6px;padding:0 16px;font-weight:700;cursor:pointer}
+.main{max-width:1080px;margin:28px auto;padding:0 20px}.tabs{display:flex;gap:2px}.tab{border:1px solid var(--bd);border-bottom:0;background:#eaf3ed;color:#486055;padding:11px 18px;border-radius:7px 7px 0 0;font-weight:700;cursor:pointer}.tab.active{background:#fff;color:var(--g2)}
+.panel{background:#fff;border:1px solid var(--bd);border-radius:0 10px 10px 10px;box-shadow:0 10px 28px #04371a1f;padding:25px}.title{margin:0 0 20px;color:var(--g2);font-size:18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:17px 34px}.fg label{margin-bottom:6px}.actions{display:flex;justify-content:flex-end;gap:12px;margin-top:24px;padding-top:18px;border-top:1px solid #e1e9e4}
+.toolbar{display:flex;gap:10px;margin-bottom:15px}.toolbar input{max-width:380px}table{width:100%;border-collapse:collapse;font-size:13px}th{background:var(--g2);color:#fff;text-align:left;padding:10px;white-space:nowrap}td{padding:10px;border-bottom:1px solid #e2e9e4;white-space:nowrap}.table-wrap{overflow:auto}.empty{text-align:center;padding:30px;color:#68766d}.badge{background:var(--g4);color:var(--g2);padding:4px 8px;border-radius:12px;font-weight:700;font-size:11px}
+.footer{text-align:center;color:#7a887f;font-size:11px;padding:18px}
+@media(max-width:760px){.header{height:auto;padding:14px 18px}.user span{display:none}.main{margin:15px auto;padding:0 10px}.panel{padding:17px}.grid{grid-template-columns:1fr;gap:15px}}
+<style>
+.save-success{position:fixed;top:24px;right:24px;z-index:9999;min-width:300px;padding:16px 20px;background:#e9f7ee;border:1px solid #78bd8e;border-left:6px solid #168445;color:#075c2b;border-radius:9px;box-shadow:0 8px 24px rgba(4,55,26,.18);font-weight:700;font-size:14px;animation:slideIn .25s ease-out}
+.save-success .check{display:inline-grid;place-items:center;width:24px;height:24px;margin-right:9px;border-radius:50%;background:#168445;color:#fff}
+@keyframes slideIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+</style></style></head>
+<body><div id="saveSuccess" class="save-success hidden"><span class="check">✓</span>Your data saved successfully.</div>
+<section id="login" class="login"><div class="card login-card">
+<div class="login-head"><div class="mark">S</div><h1>Sorting Entry</h1><p>Production Sorting Management</p></div>
+<div class="login-body"><div class="field"><label>Email</label><input id="email" type="email" autocomplete="username"></div>
+<div class="field"><label>Password</label><input id="password" type="password" autocomplete="current-password"></div>
+<div id="loginMsg" class="msg"></div><button id="loginBtn" class="primary" style="width:100%">Sign In</button>
+<div style="text-align:center;color:#7b877f;font-size:11px;margin-top:14px">Authorized users only</div></div></div></section>
+
+<section id="app" class="hidden"><header class="header"><div class="brand"><div class="brand-icon">S</div><div><h1>Sorting Entry</h1><small>Sorting Management System</small></div></div>
+<div class="user"><span id="userEmail"></span><button id="logout" class="logout">Sign Out</button></div></header>
+<main class="main"><div class="tabs"><button class="tab active" data-tab="entry">Entry Module</button><button class="tab" data-tab="all">All Data</button></div>
+<section id="entry" class="panel"><h2 class="title">Sorting Entry</h2><form id="form"><div class="grid">
+<div class="fg"><label>Sorting Date *</label><input id="date" type="date" required></div>
+<div class="fg"><label>Quantity Accepted</label><input id="accepted" type="number" min="0" step="0.001"></div>
+<div class="fg"><label>PO No. *</label><input id="po" required maxlength="50"></div>
+<div class="fg"><label>Quantity Rejected</label><input id="rejected" type="number" min="0" step="0.001"></div>
+<div class="fg"><label>Supplier Name *</label><input id="supplier" required maxlength="150"></div>
+<div class="fg"><label>Rejected Reason</label><input id="reason" maxlength="250"></div>
+<div class="fg"><label>Grade *</label><select id="grade" required><option value="">Select Model</option><option>BCZ</option><option>BFZ</option><option>BLZ</option><option>BPZ</option><option>BPZ BT</option><option>BPZ EX</option><option>BPZ NR</option><option>BPZ RPT</option><option>MGT</option><option>PRZ SOFT</option><option>PZ10</option><option>PZ20</option><option>PZ30</option><option>PZ60</option><option>PZ65</option><option>PZ70</option></select></div>
+<div class="fg"><label>Updated By *</label><select id="updatedBy" required><option value="">Select Employee</option><option>Employee 1</option><option>Employee 2</option><option>Employee 3</option></select></div>
+<div class="fg"><label>Category Type *</label><select id="category" required><option value="">Select Category</option><option>Regular</option><option>Rework</option><option>Special</option></select></div>
+<div class="fg"><label>Shift *</label><select id="shift" required><option value="">Select Shift</option><option>Shift A</option><option>Shift B</option><option>Shift C</option><option>General</option></select></div>
+</div><div id="formMsg" class="msg"></div><div class="actions"><button type="button" id="clear" class="secondary">Clear</button><button class="primary">Save Entry</button></div></form></section>
+<section id="all" class="panel hidden"><h2 class="title">All Sorting Entries</h2><div class="toolbar"><input id="search" placeholder="Search PO, supplier, grade..."><button id="refresh" class="secondary">Refresh</button></div>
+<div class="table-wrap"><table><thead><tr><th>Date</th><th>PO No.</th><th>Supplier</th><th>Grade</th><th>Category</th><th>Accepted</th><th>Rejected</th><th>Reason</th><th>Updated By</th><th>Shift</th></tr></thead><tbody id="body"><tr><td colspan="10" class="empty">No data loaded.</td></tr></tbody></table></div></section>
+<div class="footer">Sorting Management System</div></main></section>
 <script>
-  const { createClient } = supabase;
+const SUPABASE_URL="https://jpzkbhumwvtbioektpsr.supabase.co";
+const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpwemtiaHVtd3Z0YmlvZWt0cHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3ODUyNTYsImV4cCI6MjEwNDM2MTI1Nn0.BuH_dUovcE4OspHU6qTzPz6csSr0bNeNtApt9N8uy2A";
 
-  // Use your actual project URL and anon key from Settings → API
-  const supabaseUrl = "https://jpzkbhumwvtbioektpsr.supabase.co";
-  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpwemtiaHVtd3Z0YmlvZWt0cHNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3ODUyNTYsImV4cCI6MjEwNDM2MTI1Nn0.BuH_dUovcE4OspHU6qTzPz6csSr0bNeNtApt9N8uy2A";  // full anon key
-  const supabaseClient = createClient(supabaseUrl, supabaseKey);
+const configured=!SUPABASE_URL.startsWith("YOUR_")&&!SUPABASE_ANON_KEY.startsWith("YOUR_");
+const sb=configured?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
+const $=id=>document.getElementById(id);
+function showSaveSuccess(){
+  const box=$("saveSuccess");
+  box.classList.remove("hidden");
+  clearTimeout(window.saveTimer);
+  window.saveTimer=setTimeout(()=>box.classList.add("hidden"),3500);
+}
+function today(){let d=new Date();d=new Date(d.getTime()-d.getTimezoneOffset()*60000);return d.toISOString().slice(0,10)}
+$("date").value=today();
+function showApp(u){$("login").classList.add("hidden");$("app").classList.remove("hidden");$("userEmail").textContent=u?.email||""}
+function showLogin(){$("app").classList.add("hidden");$("login").classList.remove("hidden")}
+async function login(){ $("loginMsg").textContent=""; if(!sb){$("loginMsg").textContent="Configure Supabase URL and anon/publishable key in this HTML.";return} let {error}=await sb.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});if(error)$("loginMsg").textContent=error.message}
+$("loginBtn").onclick=login;$("password").onkeydown=e=>{if(e.key==="Enter")login()};
+$("logout").onclick=async()=>{if(sb)await sb.auth.signOut();showLogin()};
+if(sb){sb.auth.onAuthStateChange((e,s)=>s?showApp(s.user):showLogin());sb.auth.getSession().then(({data})=>data.session?showApp(data.session.user):showLogin())}else showLogin();
 
-    document.getElementById("furnaceForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const { error } = await supabaseClient
-        .from("Furnace_table")   // replace with your table name
-        .insert({
-          WO_No: document.getElementById("WO_No").value,
-          Sort_WO_No: document.getElementById("Sort_WO_No").value,
-          Furnace_Date: document.getElementById("Furnace_Date").value,
-          Furnace_Shift: document.getElementById("Furnace_Shift").value,
-          Charge_Type: document.getElementById("Charge_Type").value,
-          Furnace_no: document.getElementById("Furnace_no").value,
-          Furnace_Base_No: document.getElementById("Furnace_Base_No").value,
-          Category_Type: document.getElementById("Category_Type").value,
-          Quantity: document.getElementById("Quantity").value,
-          Updated_By: document.getElementById("Updated_By").value,
-          Status: document.getElementById("Status").value
-        });
-
-      if (error) {
-        alert("Error: " + error.message);
-      } else {
-        alert("✅ Data saved successfully!");
-        document.getElementById("furnaceForm").reset();
-      }
-    });
-  </script>
-</body>
-</html>
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("entry").classList.toggle("hidden",b.dataset.tab!=="entry");$("all").classList.toggle("hidden",b.dataset.tab!=="all");if(b.dataset.tab==="all")load()});
+$("clear").onclick=()=>{$("form").reset();$("date").value=today();$("formMsg").textContent=""};
+$("form").onsubmit=async e=>{e.preventDefault();$("formMsg").textContent="";if(!sb){$("formMsg").textContent="Configure Supabase first.";return}let {data:{user}}=await sb.auth.getUser();let row={sorting_date:$("date").value,po_no:$("po").value.trim(),supplier_name:$("supplier").value.trim(),grade:$("grade").value,category_type:$("category").value,quantity_accepted:Number($("accepted").value||0),quantity_rejected:Number($("rejected").value||0),rejected_reason:$("reason").value.trim()||null,updated_by:$("updatedBy").value,shift:$("shift").value,created_by:user?.id||null};let {error}=await sb.from("sorting_entries").insert(row);if(error)$("formMsg").textContent=error.message;else{$("formMsg").textContent="Your data saved successfully."; $("formMsg").className="msg ok"; showSaveSuccess(); $("form").reset();$("date").value=today()}};
+let cache=[];async function load(){if(!sb)return;let {data,error}=await sb.from("sorting_entries").select("*").order("sorting_date",{ascending:false}).limit(500);if(error){$("body").innerHTML='<tr><td colspan="10" class="empty">'+esc(error.message)+'</td></tr>';return}cache=data||[];render()}
+function render(){let q=$("search").value.toLowerCase();let rows=cache.filter(r=>Object.values(r).join(" ").toLowerCase().includes(q));$("body").innerHTML=rows.length?rows.map(r=>'<tr><td>'+esc(r.sorting_date||"")+'</td><td>'+esc(r.po_no||"")+'</td><td>'+esc(r.supplier_name||"")+'</td><td><span class="badge">'+esc(r.grade||"")+'</span></td><td>'+esc(r.category_type||"")+'</td><td>'+ (r.quantity_accepted??0)+'</td><td>'+ (r.quantity_rejected??0)+'</td><td>'+esc(r.rejected_reason||"")+'</td><td>'+esc(r.updated_by||"")+'</td><td>'+esc(r.shift||"")+'</td></tr>').join(""):'<tr><td colspan="10" class="empty">No entries found.</td></tr>'}
+function esc(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+$("refresh").onclick=load;$("search").oninput=render;
+</script></body></html>
